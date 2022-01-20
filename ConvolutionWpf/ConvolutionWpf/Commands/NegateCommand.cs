@@ -26,22 +26,6 @@ namespace ConvolutionWpf.Commands
 
             var resultPixels = new byte[image.PixelHeight * image.BackBufferStride];
 
-            for (int i = 0; i < image.PixelWidth; ++i)
-            {
-                for (int j = 0; j < image.PixelHeight; ++j)
-                {
-                    int index = j * image.BackBufferStride + 4 * i;
-
-                    for (int c = 0; c < 3; ++c)
-                    {
-                        byte negative = 255;
-                        resultPixels[index + c] = (byte)(negative - pixels[index + c]);
-                    }
-
-                    resultPixels[index + 3] = 255; // альфа-канал
-                }
-            }
-
             image.WritePixels(new Int32Rect(0, 0, image.PixelWidth, image.PixelHeight), resultPixels, image.BackBufferStride, 0);
         }
 
